@@ -1,9 +1,9 @@
-const { arrayToCSVString } = require("./arrays");
+const { arrayToCSVString } = require('./arrays');
 
 const createPerson = (name, age) => {
   return {
     name,
-    age
+    age,
   };
 };
 
@@ -46,8 +46,8 @@ const findHondas = cars => {
 const averageAge = people => {
   const allAges = people.reduce((accAge, currentAge) => {
     return accAge + currentAge.age;
-  },0);
-/* prevAge is the accumlator */
+  }, 0);
+  /* prevAge is the accumlator */
   return allAges / people.length;
 };
 
@@ -60,7 +60,6 @@ const averageAge = people => {
  };
 
  */
-
 const createTalkingPerson = (name, age) => {
   // const introduce = `${'hi ' + ' my name is '}${  name  } and I am ${  age}`;
   return {
@@ -68,7 +67,7 @@ const createTalkingPerson = (name, age) => {
     age,
     introduce: strangersName => {
       return `Hi ${strangersName}, my name is ${name} and I am ${age}!`;
-    }
+    },
   };
 };
 
@@ -82,5 +81,5 @@ module.exports = {
   findByName,
   findHondas,
   averageAge,
-  createTalkingPerson
+  createTalkingPerson,
 };
