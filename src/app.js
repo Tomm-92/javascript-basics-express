@@ -221,10 +221,10 @@ app.post('/arrays/remove-element', (req, res) => {
   const { index } = req.query;
   // eslint-disable-next-line no-console
   console.log(req.query.index);
-  if (req.query.index) {
+  /* if (req.query.index) {
     res.status(200).json({ result: removeNthElement2(index, array) });
-  }
-  res.status(200).json({ result: removeNthElement2(0, array) });
+  } */
+  res.status(200).json({ result: removeNthElement2(index, array) });
 });
 
 /* req.query.length;

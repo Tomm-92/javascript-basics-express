@@ -50,10 +50,16 @@ const onlyEven = numbers => {
   return numbers.filter(evenNumber => evenNumber % 2 === 0);
 };
 
+/* const removeNthElement2 = (index, array) => {
+  /* return array.filter(array => array == index);
+  return array.filter((item, arrayIndex) => arrayIndex !== index); */
+/* looking at everything in the array which doesn't equal index 
+}; */
+
 const removeNthElement2 = (index, array) => {
-  /* return array.filter(array => array == index); */
-  return array.filter((item, arrayIndex) => arrayIndex !== index);
-  /* looking at everything in the array which doesn't equal index */
+  const newArr = [...array];
+  newArr.splice(index, 1);
+  return newArr;
 };
 
 const elementsStartingWithAVowel = strings => {
