@@ -15,7 +15,7 @@ const csvStringToArray = string => {
 };
 
 const addToArray = (element, array) => {
-  array.push(element)
+  array.push(element);
 };
 
 const addToArray2 = (element, array) => {
@@ -41,7 +41,7 @@ function reverseWordsInArray(strings) {
     word
       .split('')
       .reverse()
-      .join('')
+      .join(''),
   );
   // return strings.map(strings => [...strings].reverse().join('')); this works for special characters //
 }
@@ -97,5 +97,5 @@ module.exports = {
   elementsStartingWithAVowel,
   removeSpaces,
   sumNumbers,
-  sortByLastLetter
+  sortByLastLetter,
 };

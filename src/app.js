@@ -8,6 +8,15 @@ const {
 } = require('./lib/strings');
 
 const { add, subtract, multiply, divide, remainder } = require('./lib/numbers');
+const { negate, truthiness, isOdd, startsWith } = require('./lib/booleans');
+const {
+  getNthElement,
+  arrayToCSVString,
+  addToArray2,
+  elementsStartingWithAVowel,
+  removeNthElement2,
+  removeNthElement,
+} = require('./lib/arrays');
 
 const app = express();
 
@@ -28,9 +37,9 @@ app.get('/strings/lower/:string', (req, res) => {
 });
 
 app.get('/strings/first-characters/:string', (req, res) => {
-  req.query.length
-    ? res.status(200).json({ result: firstCharacters(req.params.string, req.query.length) })
-    : res.status(200).json({ result: firstCharacter(req.params.string) });
+  req.query.length;
+  res.status(200).json({ result: firstCharacters(req.params.string, req.query.length) });
+  res.status(200).json({ result: firstCharacter(req.params.string) });
 });
 
 app.get('/strings/n-characters/:string', (req, res) => {
@@ -49,18 +58,20 @@ app.get('/numbers/add/:a/and/:b', (req, res) => {
   const a = parseInt(req.params.a, 10);
   const b = parseInt(req.params.b, 10);
 
-  Number.isNaN(a) || Number.isNaN(b)
-    ? res.status(400).json({ error: 'Parameters must be valid numbers.' })
-    : res.status(200).json({ result: add(a, b) });
+  if (Number.isNaN(a) || Number.isNaN(b)) {
+    res.status(400).json({ error: 'Parameters must be valid numbers.' });
+  }
+  res.status(200).json({ result: add(a, b) });
 });
 
 app.get('/numbers/subtract/:a/from/:b', (req, res) => {
   const a = parseInt(req.params.a, 10);
   const b = parseInt(req.params.b, 10);
 
-  Number.isNaN(a) || Number.isNaN(b)
-    ? res.status(400).json({ error: 'Parameters must be valid numbers.' })
-    : res.status(200).json({ result: subtract(b, a) });
+  if (Number.isNaN(a) || Number.isNaN(b)) {
+    res.status(400).json({ error: 'Parameters must be valid numbers.' });
+  }
+  res.status(200).json({ result: subtract(b, a) });
 });
 
 // MULTIPLY
@@ -150,5 +161,74 @@ app.post('/numbers/remainder', (req, res) => {
 
   res.status(200).json({ result: remainder(a, b) });
 });
+
+// BOOLEANS
+
+app.post('/booleans/negate', (req, res) => {
+  const { value } = req.body;
+  res.status(200).json({ result: negate(value) });
+});
+
+app.post('/booleans/truthiness', (req, res) => {
+  const { value } = req.body;
+  res.status(200).json({ result: truthiness(value) });
+});
+
+app.get('/booleans/is-odd/:number', (req, res) => {
+  const number = parseInt(req.params.number, 10);
+
+  if (Number.isNaN(number)) {
+    res.status(400).json({ error: 'Parameter must be a number.' });
+  }
+  res.status(200).json({ result: isOdd(number) });
+});
+
+app.get('/booleans/:string/starts-with/:character', (req, res) => {
+  const { string } = req.params;
+  const { character } = req.params;
+  if (character.length > 1) {
+    res.status(400).json({ error: 'Parameter "character" must be a single character.' });
+  }
+  res.status(200).json({ result: startsWith(character, string) });
+});
+
+// Arrays
+
+app.post('/arrays/element-at-index/:index', (req, res) => {
+  const { array } = req.body;
+  const { index } = req.params;
+  res.status(200).json({ result: getNthElement(index, array) });
+});
+
+app.post('/arrays/to-string', (req, res) => {
+  const { array } = req.body;
+  res.status(200).json({ result: arrayToCSVString(array) });
+});
+
+app.post('/arrays/append', (req, res) => {
+  const { value } = req.body;
+  const { array } = req.body;
+  res.status(200).json({ result: addToArray2(value, array) });
+});
+
+app.post('/arrays/starts-with-vowel', (req, res) => {
+  const { array } = req.body;
+  res.status(200).json({ result: elementsStartingWithAVowel(array) });
+});
+
+app.post('/arrays/remove-element', (req, res) => {
+  const { array } = req.body;
+  const { index } = req.query;
+  // eslint-disable-next-line no-console
+  console.log(req.query.index);
+  if (req.query.index) {
+    res.status(200).json({ result: removeNthElement2(index, array) });
+  }
+  res.status(200).json({ result: removeNthElement2(0, array) });
+});
+
+/* req.query.length;
+res.status(200).json({ result: firstCharacters(req.params.string, req.query.length) });
+res.status(200).json({ result: firstCharacter(req.params.string) }); */
 
 module.exports = app;
