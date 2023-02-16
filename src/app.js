@@ -15,7 +15,6 @@ const {
   addToArray2,
   elementsStartingWithAVowel,
   removeNthElement2,
-  removeNthElement,
 } = require('./lib/arrays');
 
 const app = express();
@@ -37,14 +36,11 @@ app.get('/strings/lower/:string', (req, res) => {
 });
 
 app.get('/strings/first-characters/:string', (req, res) => {
-  req.query.length;
-  res.status(200).json({ result: firstCharacters(req.params.string, req.query.length) });
-  res.status(200).json({ result: firstCharacter(req.params.string) });
-});
-
-app.get('/strings/n-characters/:string', (req, res) => {
   const n = req.query.length;
-  res.status(200).json({ result: nCharacters(req.params.string, n) });
+  if (n) {
+    res.status(200).json({ result: firstCharacters(req.params.string, n) });
+  }
+  res.status(200).json({ result: firstCharacter(req.params.string) });
 });
 
 /* app.get('/strings/n-characters/:string', (req, res) => {
@@ -94,23 +90,6 @@ app.post('/numbers/multiply', (req, res) => {
 
   res.status(200).json({ result: multiply(a, b) });
 });
-
-/* app.post('/numbers/multiply', (req, res) => {
-  const { a } = req.body;
-
-  const { b } = req.body;
-  const aIsNum = typeof a === 'number';
-  const bIsNum = typeof b === 'number';
-
-  // const aIsNum = Number.isNaN(a);
-  // const bIsNum = Number.isNaN(b);
-
-  // console.log(`${aIsNum} : aIsNum ${bIsNum} :bIsNum`);
-
-  if (!aIsNum || !bIsNum) {
-    res.status(400).json({ error: 'Parameters "a" and "b" must be valid numbers.' });
-  } else return res.status(200).json({ result: multiply(a, b) });
-}); */
 
 // DIVIDE
 
@@ -219,16 +198,7 @@ app.post('/arrays/starts-with-vowel', (req, res) => {
 app.post('/arrays/remove-element', (req, res) => {
   const { array } = req.body;
   const { index } = req.query;
-  // eslint-disable-next-line no-console
-  console.log(req.query.index);
-  /* if (req.query.index) {
-    res.status(200).json({ result: removeNthElement2(index, array) });
-  } */
   res.status(200).json({ result: removeNthElement2(index, array) });
 });
-
-/* req.query.length;
-res.status(200).json({ result: firstCharacters(req.params.string, req.query.length) });
-res.status(200).json({ result: firstCharacter(req.params.string) }); */
 
 module.exports = app;
