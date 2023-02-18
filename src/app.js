@@ -43,11 +43,6 @@ app.get('/strings/first-characters/:string', (req, res) => {
   res.status(200).json({ result: firstCharacter(req.params.string) });
 });
 
-/* app.get('/strings/n-characters/:string', (req, res) => {
-  const n = req.query.length;
-  res.status(200).json({ result: nCharacters(req.params.string, n) });
-}); */
-
 // NUMBERS
 
 app.get('/numbers/add/:a/and/:b', (req, res) => {

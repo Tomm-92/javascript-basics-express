@@ -1,5 +1,3 @@
-const { arrayToCSVString } = require('./arrays');
-
 const createPerson = (name, age) => {
   return {
     name,
@@ -20,7 +18,6 @@ const hasProperty = (property, object) => {
     return true;
   }
   return false;
-  // object.hasOwnProperty(property); //
 };
 
 const isOver65 = person => {
@@ -28,7 +25,6 @@ const isOver65 = person => {
     return true;
   }
   return false;
-  // person.age > 65 //
 };
 
 const getAges = people => {
@@ -47,21 +43,10 @@ const averageAge = people => {
   const allAges = people.reduce((accAge, currentAge) => {
     return accAge + currentAge.age;
   }, 0);
-  /* prevAge is the accumlator */
   return allAges / people.length;
 };
 
-/* 
-
-  const { length } = people;
-   return people.reduce((acc, val) => {
-     return acc + (val.age/length);
-  }, 0);
- };
-
- */
 const createTalkingPerson = (name, age) => {
-  // const introduce = `${'hi ' + ' my name is '}${  name  } and I am ${  age}`;
   return {
     name,
     age,

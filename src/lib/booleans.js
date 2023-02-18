@@ -12,12 +12,10 @@ function either(a, b) {
 
 function none(a, b) {
   return !a && !b;
-  // !(a || b); //
 }
 
 function one(a, b) {
   return a !== b;
-  // (a || b) && !(a && b) //
 }
 
 function truthiness(a) {
@@ -45,13 +43,11 @@ function isEven(a) {
 }
 
 function isSquare(a) {
-  // return Math.sqrt(a) % 1 === 0; //
   return Boolean(Math.sqrt(a) % 1 === 0);
 }
 
 function startsWith(char, string) {
   return string.startsWith(char);
-  // string.charAt(0) === char; //
 }
 
 function containsVowels(string) {
@@ -62,12 +58,9 @@ function containsVowels(string) {
   return false;
 }
 
-/* string.includes('a') || string.includes ('e') || string.includes ('i') || string.includes ('o') || string.includes ('u') || string.includes('A') || string.includes ('E') || string.includes ('I') || string.includes ('O') || string.includes ('U');
-/* string.match(/[aeiou]/gi */
-
 function isLowerCase(string) {
   return string.toLowerCase() === string;
-};
+}
 
 module.exports = {
   negate,
@@ -84,5 +77,5 @@ module.exports = {
   isSquare,
   startsWith,
   containsVowels,
-  isLowerCase
+  isLowerCase,
 };

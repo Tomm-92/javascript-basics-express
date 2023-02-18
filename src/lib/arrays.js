@@ -7,7 +7,6 @@ const getNthElement = (index, array) => {
 
 const arrayToCSVString = array => {
   return array.toString();
-  /* return array.join() */
 };
 
 const csvStringToArray = string => {
@@ -24,11 +23,9 @@ const addToArray2 = (element, array) => {
 
 const removeNthElement = (index, array) => {
   return array.splice(index, 1);
-  // at position index (number passed in to function) remove 1 element //
 };
 
 const numbersToStrings = numbers => {
-  // return numbers.map(String); //
   return numbers.map(number => String(number));
 };
 
@@ -43,18 +40,11 @@ function reverseWordsInArray(strings) {
       .reverse()
       .join(''),
   );
-  // return strings.map(strings => [...strings].reverse().join('')); this works for special characters //
 }
 
 const onlyEven = numbers => {
   return numbers.filter(evenNumber => evenNumber % 2 === 0);
 };
-
-/* const removeNthElement2 = (index, array) => {
-  /* return array.filter(array => array == index);
-  return array.filter((item, arrayIndex) => arrayIndex !== index); */
-/* looking at everything in the array which doesn't equal index 
-}; */
 
 const removeNthElement2 = (index, array) => {
   const newArr = [...array];
@@ -67,7 +57,6 @@ const elementsStartingWithAVowel = strings => {
 };
 
 const removeSpaces = string => {
-  // return string.replace(/\s/g, ''); //
   return string.split(' ').join('');
 };
 
@@ -76,7 +65,6 @@ const sumNumbers = numbers => {
 };
 
 const sortByLastLetter = strings => {
-  // return strings.sort((a, b) => a.charCodeAt(a.length - 1) - b.charCodeAt(b.length - 1)); //
   const reverseString = item =>
     item
       .split('')

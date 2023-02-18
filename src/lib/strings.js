@@ -1,6 +1,5 @@
 function sayHello(string) {
   return `Hello, ${string}!`;
-  /* `Hello, ${string}!`; */
 }
 
 function uppercase(string) {
@@ -21,7 +20,6 @@ function firstCharacter(string) {
 
 function firstCharacters(string, length) {
   return string.substring(0, length);
-  /* string.slice(0, n); */
 }
 
 module.exports = {
