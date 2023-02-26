@@ -36,11 +36,13 @@ app.get('/strings/lower/:string', (req, res) => {
 });
 
 app.get('/strings/first-characters/:string', (req, res) => {
-  const n = req.query.length;
-  if (n) {
-    res.status(200).json({ result: firstCharacters(req.params.string, n) });
+  const { length } = req.query;
+  const { string } = req.params;
+
+  if (length) {
+    res.status(200).json({ result: firstCharacters(string, length) });
   }
-  res.status(200).json({ result: firstCharacter(req.params.string) });
+  res.status(200).json({ result: firstCharacter(string) });
 });
 
 // NUMBERS
@@ -139,13 +141,11 @@ app.post('/numbers/remainder', (req, res) => {
 // BOOLEANS
 
 app.post('/booleans/negate', (req, res) => {
-  const { value } = req.body;
-  res.status(200).json({ result: negate(value) });
+  res.status(200).json({ result: negate(req.body.value) });
 });
 
 app.post('/booleans/truthiness', (req, res) => {
-  const { value } = req.body;
-  res.status(200).json({ result: truthiness(value) });
+  res.status(200).json({ result: truthiness(req.body.value) });
 });
 
 app.get('/booleans/is-odd/:number', (req, res) => {
@@ -158,42 +158,33 @@ app.get('/booleans/is-odd/:number', (req, res) => {
 });
 
 app.get('/booleans/:string/starts-with/:character', (req, res) => {
-  const { string } = req.params;
   const { character } = req.params;
   if (character.length > 1) {
     res.status(400).json({ error: 'Parameter "character" must be a single character.' });
   }
-  res.status(200).json({ result: startsWith(character, string) });
+  res.status(200).json({ result: startsWith(character, req.params.string) });
 });
 
 // Arrays
 
 app.post('/arrays/element-at-index/:index', (req, res) => {
-  const { array } = req.body;
-  const { index } = req.params;
-  res.status(200).json({ result: getNthElement(index, array) });
+  res.status(200).json({ result: getNthElement(req.params.index, req.body.array) });
 });
 
 app.post('/arrays/to-string', (req, res) => {
-  const { array } = req.body;
-  res.status(200).json({ result: arrayToCSVString(array) });
+  res.status(200).json({ result: arrayToCSVString(req.body.array) });
 });
 
 app.post('/arrays/append', (req, res) => {
-  const { value } = req.body;
-  const { array } = req.body;
-  res.status(200).json({ result: addToArray2(value, array) });
+  res.status(200).json({ result: addToArray2(req.body.value, req.body.array) });
 });
 
 app.post('/arrays/starts-with-vowel', (req, res) => {
-  const { array } = req.body;
-  res.status(200).json({ result: elementsStartingWithAVowel(array) });
+  res.status(200).json({ result: elementsStartingWithAVowel(req.body.array) });
 });
 
 app.post('/arrays/remove-element', (req, res) => {
-  const { array } = req.body;
-  const { index } = req.query;
-  res.status(200).json({ result: removeNthElement2(index, array) });
+  res.status(200).json({ result: removeNthElement2(req.query.index, req.body.array) });
 });
 
 module.exports = app;

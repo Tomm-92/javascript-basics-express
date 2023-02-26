@@ -1,8 +1,5 @@
 const getNthElement = (index, array) => {
-  if (index >= array.length) {
-    return array[index - array.length];
-  }
-  return array[index];
+  return array[index % array.length];
 };
 
 const arrayToCSVString = array => {
@@ -65,15 +62,7 @@ const sumNumbers = numbers => {
 };
 
 const sortByLastLetter = strings => {
-  const reverseString = item =>
-    item
-      .split('')
-      .reverse()
-      .join('');
-  return strings
-    .map(reverseString)
-    .sort()
-    .map(reverseString);
+  return strings.sort((a, b) => a.charCodeAt(a.length - 1) - b.charCodeAt(b.length - 1));
 };
 
 module.exports = {
